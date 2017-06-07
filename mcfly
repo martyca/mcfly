@@ -19,14 +19,20 @@ def loadConfig(location="/etc/mcfly.conf"):
         else:
             return config       
 
+def rsync(server, dir):
+    try:
+        rproc = call(["rsync", "-ar", "{0}:{1}".format(server, dir), "."])
+    except:
+        print('bad things happened')
+    else:
+        return(rproc)
+
 parser = argparse.ArgumentParser(description='mcfly is a simple backup tool that copies folders located on remote servers to a locally defined backup folder.',
 epilog=
 '''Written by Martin Caarels <martin@caarels.com>
 LICENSE=MIT
 2017''',
 formatter_class=argparse.RawTextHelpFormatter)
-
-#parser.add_argument("-i", "--init", help="Creates a basic config file, !!WARNING!! this will overwrite a config file if there is one.", action="store_true")
 parser.add_argument("-v", "--verbose", help="Increase output verbosity.", action="store_true")
 parser.add_argument("-c", "--config", nargs='?', default='/etc/mcfly.conf', help="Run using alternative config file, default location is /etc/mcfly.conf.", type=loadConfig)
 args = parser.parse_args()
