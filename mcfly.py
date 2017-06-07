@@ -24,9 +24,12 @@ parser.add_argument("-v", "--verbose", help="Increase output verbosity.", action
 parser.add_argument("-c", "--config", help="Run using alternative config file, default location is /etc/mcfly.conf.", type=loadConfig)
 args = parser.parse_args()
 
+if args.config:
+    config = args.config
+else:
+    config = loadConfig()
 
 if __name__ == "__main__":
-    config = loadConfig()
     for server in config["servers"]:
         print(server)
         for dir in config["servers"][server]:
