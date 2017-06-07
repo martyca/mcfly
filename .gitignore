@@ -1,6 +1,8 @@
 # custom stuff
 # no config files.
 *.conf
+# no log files either
+*.log
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
